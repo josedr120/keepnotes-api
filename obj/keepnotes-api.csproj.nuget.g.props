@@ -7,10 +7,10 @@
     <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">/home/josedr/.nuget/packages/</NuGetPackageRoot>
     <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">/home/josedr/.nuget/packages/</NuGetPackageFolders>
     <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
-    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">5.8.0</NuGetToolVersion>
+    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">5.9.1</NuGetToolVersion>
   </PropertyGroup>
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <SourceRoot Include="$([MSBuild]::EnsureTrailingSlash($(NuGetPackageFolders)))" />
+    <SourceRoot Include="/home/josedr/.nuget/packages/" />
   </ItemGroup>
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
@@ -20,6 +20,7 @@
       <NuGetPackageId>MongoDB.Libmongocrypt</NuGetPackageId>
       <NuGetPackageVersion>1.2.1</NuGetPackageVersion>
       <NuGetItemType>Content</NuGetItemType>
+      <Pack>false</Pack>
       <Private>False</Private>
       <Link>libmongocrypt.dylib</Link>
     </Content>
@@ -27,6 +28,7 @@
       <NuGetPackageId>MongoDB.Libmongocrypt</NuGetPackageId>
       <NuGetPackageVersion>1.2.1</NuGetPackageVersion>
       <NuGetItemType>Content</NuGetItemType>
+      <Pack>false</Pack>
       <Private>False</Private>
       <Link>libmongocrypt.so</Link>
     </Content>
@@ -34,6 +36,7 @@
       <NuGetPackageId>MongoDB.Libmongocrypt</NuGetPackageId>
       <NuGetPackageVersion>1.2.1</NuGetPackageVersion>
       <NuGetItemType>Content</NuGetItemType>
+      <Pack>false</Pack>
       <Private>False</Private>
       <Link>mongocrypt.dll</Link>
     </Content>
@@ -43,6 +46,7 @@
       <NuGetPackageId>MongoDB.Driver.Core</NuGetPackageId>
       <NuGetPackageVersion>2.12.4</NuGetPackageVersion>
       <NuGetItemType>Content</NuGetItemType>
+      <Pack>false</Pack>
       <Private>False</Private>
       <Link>Core/Compression/Snappy/lib/win/snappy32.dll</Link>
     </Content>
@@ -50,6 +54,7 @@
       <NuGetPackageId>MongoDB.Driver.Core</NuGetPackageId>
       <NuGetPackageVersion>2.12.4</NuGetPackageVersion>
       <NuGetItemType>Content</NuGetItemType>
+      <Pack>false</Pack>
       <Private>False</Private>
       <Link>Core/Compression/Snappy/lib/win/snappy64.dll</Link>
     </Content>
@@ -57,6 +62,7 @@
       <NuGetPackageId>MongoDB.Driver.Core</NuGetPackageId>
       <NuGetPackageVersion>2.12.4</NuGetPackageVersion>
       <NuGetItemType>Content</NuGetItemType>
+      <Pack>false</Pack>
       <Private>False</Private>
       <Link>Core/Compression/Zstandard/lib/win/libzstd.dll</Link>
     </Content>

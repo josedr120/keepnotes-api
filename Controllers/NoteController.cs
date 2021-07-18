@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace keepnotes_api.Controllers
 {
-    [Authorize]
-    [Route("api/note")]
+    /*[Authorize]*/
+    [Route("api/note/{userId:length(24)}")]
     [ApiController]
     public class NoteController : ControllerBase
     {
@@ -19,7 +19,7 @@ namespace keepnotes_api.Controllers
             _noteService = noteService;
         }
         
-        [HttpGet("{userId:length(24)}")]
+        [HttpGet("")]
         public ActionResult<List<Note>> GetAllNotes([FromRoute] string userId)
         {
             var userNotes = _noteService.GetAllNotes(userId);
@@ -27,10 +27,10 @@ namespace keepnotes_api.Controllers
             return Ok(userNotes);
         }
 
-        [HttpGet("{userId:length(24)}/{id:length(24)}")]
-        public ActionResult<Note> GetNoteById([FromRoute] string userId, string id)
+        [HttpGet("{noteId:length(24)}")]
+        public ActionResult<Note> GetNoteById([FromRoute] string userId, string noteId)
         {
-            var note = _noteService.GetNoteById(id, userId);
+            var note = _noteService.GetNoteById(noteId, userId);
 
             if (note == null)
             {
@@ -41,7 +41,7 @@ namespace keepnotes_api.Controllers
         }
 
         
-        [HttpPost("{userId:length(24)}/create")]
+        [HttpPost("create")]
         public ActionResult<Note> CreateNote(Note note, [FromRoute] string userId)
         {
             _noteService.CreateNote(note, userId);
@@ -49,18 +49,17 @@ namespace keepnotes_api.Controllers
             return Ok(note);
         }
 
-        [HttpPut("{id:length(24)}")]
-        public ActionResult<Note> UpdateNote(string id, Note updatedNote)
+        [HttpPut("{noteId:length(24)}")]
+        public ActionResult<Note> UpdateNote([FromRoute] string userId, string noteId, Note updatedNote)
         {
-            var note = _noteService.GetNoteById(id);
+            
 
-            if (note == null)
+            if (noteId == null)
             {
                 return NotFound();
             }
             
-            _noteService.UpdateNote(id, updatedNote);
-
+            _noteService.UpdateNote(userId, noteId, updatedNote);
             return NoContent();
         }
 

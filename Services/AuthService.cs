@@ -31,9 +31,9 @@ namespace keepnotes_api.Services
         public AuthenticatedResponse Register(User user)
         {
             var salt = BCryptNet.GenerateSalt(10);
-            var hasPassword = BCryptNet.HashPassword(user.Password, salt);
+            var hashPassword = BCryptNet.HashPassword(user.Password, salt);
 
-            user.Password = hasPassword;
+            user.Password = hashPassword;
             _user.InsertOne(user);
 
             var token = GenerateJwtToken(user);
@@ -44,12 +44,20 @@ namespace keepnotes_api.Services
 
         public AuthenticatedResponse Login(Login login)
         {
-            var user = _user.Find(x => x.Username == login.Username && x.Password == login.Password).FirstOrDefault();
+            var user = _user.Find(x => x.Username == login.Username).FirstOrDefault();
 
             if (user == null)
             {
                 return null;
             }
+
+            var hashVerify = BCryptNet.Verify(login.Password, user.Password);
+
+            if (!hashVerify)
+            {
+                return null;
+            }
+            
 
             var token = GenerateJwtToken(user);
 

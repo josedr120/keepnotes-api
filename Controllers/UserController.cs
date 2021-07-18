@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using keepnotes_api.DTOs;
 using keepnotes_api.Models;
 using keepnotes_api.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -8,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace keepnotes_api.Controllers
 {
-    [Authorize]
+    /*[Authorize]*/
     [Route("api/user")]
     [ApiController]
     public class UserController : ControllerBase
@@ -38,8 +39,8 @@ namespace keepnotes_api.Controllers
             return Ok(user);
         }
 
-        [HttpPut("{id:length(24)}")]
-        public ActionResult<User> UpdateUser(string id, User updatedUser)
+        /*[HttpPut("{id:length(24)}")]
+        public ActionResult<UserDto> UpdateUser(string id, User updatedUser)
         {
             var user = _userService.GetUser(id);
 
@@ -51,7 +52,7 @@ namespace keepnotes_api.Controllers
             _userService.UpdateUser(id, updatedUser);
 
             return NoContent();
-        }
+        }*/
 
         [HttpDelete("{id:length(24)}")]
         public ActionResult<User> DeleteUser(string id)
