@@ -51,7 +51,7 @@ namespace keepnotes_api.Helpers
                 var jwtToken = (JwtSecurityToken) validatedToken;
                 var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
 
-                context.Items["User"] = userService.GetUser(userId.ToString());
+                context.Items["User"] = userService.Get(userId.ToString());
             }
             catch (Exception e)
             {

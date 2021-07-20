@@ -1,6 +1,9 @@
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
+using keepnotes_api.Helpers;
 using keepnotes_api.Interfaces;
 using keepnotes_api.Models;
 using Microsoft.Extensions.Configuration;
@@ -11,7 +14,7 @@ using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace keepnotes_api.Services
 {
-    public class AuthService
+    public class AuthService : IAuthService
     {
         private readonly IMongoCollection<User> _user;
 
@@ -28,13 +31,16 @@ namespace keepnotes_api.Services
             _jwtSecretKey = configuration.GetSection("JwtSecretKey").ToString();
         }
 
-        public AuthenticatedResponse Register(User user)
+        public async Task<AuthenticatedResponse> Register(User user)
         {
+
             var salt = BCryptNet.GenerateSalt(10);
             var hashPassword = BCryptNet.HashPassword(user.Password, salt);
 
+            user.ProfileImageUrl =
+                $"https://ui-avatars.com/api/?name={user.Username}&background={RandomColor()}&color=fff";
             user.Password = hashPassword;
-            _user.InsertOne(user);
+            await _user.InsertOneAsync(user);
 
             var token = GenerateJwtToken(user);
 
@@ -42,9 +48,10 @@ namespace keepnotes_api.Services
         }
 
 
-        public AuthenticatedResponse Login(Login login)
+        public async Task<AuthenticatedResponse> Login(Login login)
         {
-            var user = _user.Find(x => x.Username == login.Username).FirstOrDefault();
+            var filter = Builders<User>.Filter.Eq(x => x.Username, login.Username);
+            var user = await _user.Find(filter).FirstOrDefaultAsync();
 
             if (user == null)
             {
@@ -75,7 +82,7 @@ namespace keepnotes_api.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim("Id", user.Id)
+                    new Claim("Id", user.Id.ToString())
                 }),
 
                 Expires = UtcNow.AddHours(1),
@@ -89,6 +96,31 @@ namespace keepnotes_api.Services
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             return tokenHandler.WriteToken(token);
+        }
+        
+        /*const randomColor = (): string => {
+            let randomColor = '';
+            let char = '0123456789abcdefghijklmnopqrstuvwxyz';
+
+            for (let i = 0; i < 6; i++) {
+                randomColor = randomColor + char[Math.floor(Math.random() * 16)];
+            }
+
+            return randomColor;
+        };*/
+
+        private string RandomColor()
+        {
+            var rand = new Random();
+            var randomColor = "";
+            var Char = "0123456789abcdefghijklmnopqrstuvwxyz";
+
+            for (int i = 0; i < 6; i++)
+            {
+                randomColor += Char[(int) Math.Floor((double) rand.Next(16))];
+            }
+
+            return randomColor;
         }
     }
 }

@@ -2,7 +2,7 @@ using keepnotes_api.Interfaces;
 
 namespace keepnotes_api.DTOs
 {
-    public class UserDto: IUser
+    public class UserDto
     {
 
         public string Username { get; set; }

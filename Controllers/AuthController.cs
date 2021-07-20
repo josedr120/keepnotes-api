@@ -23,9 +23,9 @@ namespace keepnotes_api.Controllers
         [AllowAnonymous]
         [Route("register")]
         [HttpPost]
-        public  ActionResult<AuthenticatedResponse> Register([FromBody] User user)
+        public async Task<IActionResult> Register([FromBody] User user)
         {
-            var response = _authService.Register(user);
+            var response = await _authService.Register(user);
 
             return Ok(response);
         }
@@ -33,9 +33,9 @@ namespace keepnotes_api.Controllers
         [AllowAnonymous]
         [Route("login")]
         [HttpPost]
-        public ActionResult<AuthenticatedResponse> Login([FromBody] Login login)
+        public async Task<ActionResult<Login>> Login([FromBody] Login login)
         {
-            var response = _authService.Login(login);
+            var response = await _authService.Login(login);
 
             if (response == null)
             {

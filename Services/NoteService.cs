@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
+using keepnotes_api.DTOs;
 using keepnotes_api.Helpers;
 using keepnotes_api.Interfaces;
 using keepnotes_api.Models;
@@ -8,7 +10,7 @@ using MongoDB.Driver;
 
 namespace keepnotes_api.Services
 {
-    public class NoteService
+    public class NoteService : INoteService
     {
         private readonly IMongoCollection<Note> _note;
 
@@ -20,9 +22,9 @@ namespace keepnotes_api.Services
             _note = database.GetCollection<Note>(settings.NotesCollectionName);
         }
 
-        public List<Note> GetAllNotes(string userId)
+        public async Task<IEnumerable<Note>> Get(string userId)
         {
-            var userNotes = _note.Find(notes => notes.UserId == userId).ToList();
+            var userNotes = await _note.Find(notes => notes.UserId == userId).ToListAsync();
             
             // loops through all note objects and decrypts {title} and {content}
             userNotes.ForEach(x =>
@@ -38,9 +40,9 @@ namespace keepnotes_api.Services
             return userNotes;
         }
 
-        public Note GetNoteById(string id, string userId = "")
+        public async Task<Note> GetById(string noteId, string userId = "")
         {
-            var userNote = _note.Find(note => note.UserId == userId && note.Id == id).FirstOrDefault();
+            var userNote = await _note.Find(note => note.UserId == userId && note.Id == noteId).FirstOrDefaultAsync();
             var decryptTitle = new Crypto().Decrypt(userNote.Title);
             var decryptContent = new Crypto().Decrypt(userNote.Content);
             
@@ -50,7 +52,7 @@ namespace keepnotes_api.Services
             return userNote;
         }
 
-        public Note CreateNote(Note note, string userId)
+        public async Task<Note> Create(Note note, string userId)
         {
             var titleEncrypt = new Crypto().Encrypt(note.Title);
             var contentEncrypt = new Crypto().Encrypt(note.Content);
@@ -58,26 +60,31 @@ namespace keepnotes_api.Services
             note.UserId = userId;
             note.Title = titleEncrypt;
             note.Content = contentEncrypt;
-            _note.InsertOne(note);
+            await _note.InsertOneAsync(note);
 
             return note;
         }
 
-        public void UpdateNote(string userId, string noteId, Note updatedNote)
+        public async Task<bool> Update(string noteId, Note note)
         {
+            var titleEncrypt = new Crypto().Encrypt(note.Title);
+            var contentEncrypt = new Crypto().Encrypt(note.Content);
+            var filter = Builders<Note>.Filter.Eq(x => x.Id, noteId);
+            var update = Builders<Note>.Update
+                .Set(x => x.Title, titleEncrypt)
+                .Set(x => x.Content, contentEncrypt);
 
+            var result = await _note.UpdateOneAsync(filter, update);
 
-            var titleEncrypt = new Crypto().Encrypt(updatedNote.Title);
-            var contentEncrypt = new Crypto().Encrypt(updatedNote.Content);
-
-            updatedNote.UserId = userId;
-            updatedNote.Title = titleEncrypt;
-            updatedNote.Content = contentEncrypt;
-
-
-            _note.ReplaceOne(note => note.Id == noteId, updatedNote);
+            return result.ModifiedCount == 1;
         }
 
-        public void DeleteNote(string id) => _note.DeleteOne(note => note.Id == id);
+        public async Task<bool> Delete(string noteId)
+        {
+            var filter = Builders<Note>.Filter.Eq(x => x.Id, noteId);
+            var result = await _note.DeleteOneAsync(filter);
+
+            return result.DeletedCount == 1;
+        }
     }
 }

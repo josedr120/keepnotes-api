@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using keepnotes_api.DTOs;
 using keepnotes_api.Models;
 using keepnotes_api.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -20,17 +22,17 @@ namespace keepnotes_api.Controllers
         }
         
         [HttpGet("")]
-        public ActionResult<List<Note>> GetAllNotes([FromRoute] string userId)
+        public async Task<ActionResult<Note>> Get([FromRoute] string userId)
         {
-            var userNotes = _noteService.GetAllNotes(userId);
+            var userNotes = await _noteService.Get(userId);
 
             return Ok(userNotes);
         }
 
         [HttpGet("{noteId:length(24)}")]
-        public ActionResult<Note> GetNoteById([FromRoute] string userId, string noteId)
+        public async Task<ActionResult<Note>> GetById([FromRoute] string userId, string noteId)
         {
-            var note = _noteService.GetNoteById(noteId, userId);
+            var note = await _noteService.GetById(noteId, userId);
 
             if (note == null)
             {
@@ -42,38 +44,36 @@ namespace keepnotes_api.Controllers
 
         
         [HttpPost("create")]
-        public ActionResult<Note> CreateNote(Note note, [FromRoute] string userId)
+        public async Task<IActionResult> Create(Note note, [FromRoute] string userId)
         {
-            _noteService.CreateNote(note, userId);
+            await _noteService.Create(note, userId);
 
             return Ok(note);
         }
 
         [HttpPut("{noteId:length(24)}")]
-        public ActionResult<Note> UpdateNote([FromRoute] string userId, string noteId, Note updatedNote)
+        public async Task<IActionResult> Update([FromRoute] string userId, string noteId, Note updatedNote)
         {
             
-
             if (noteId == null)
             {
                 return NotFound();
             }
-            
-            _noteService.UpdateNote(userId, noteId, updatedNote);
+            await _noteService.Update(noteId, updatedNote);
             return NoContent();
         }
 
-        [HttpDelete("{id:length(24)}")]
-        public ActionResult<Note> DeleteNoteById(string id)
+        [HttpDelete("{noteId:length(24)}")]
+        public async Task<IActionResult> Delete(string noteId)
         {
-            var note = _noteService.GetNoteById(id);
+            var note = await _noteService.GetById(noteId);
 
             if (note == null)
             {
                 return NotFound();
             }
             
-            _noteService.DeleteNote(id);
+            await _noteService.Delete(noteId);
 
             return NoContent();
         }

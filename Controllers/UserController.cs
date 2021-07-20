@@ -24,12 +24,17 @@ namespace keepnotes_api.Controllers
 
         [HttpGet]
         [Route("all")]
-        public ActionResult<List<User>> GetUsers() => _userService.GetUsers();
-
-        [HttpGet("{id:length(24)}")]
-        public ActionResult<User> GetUser(string id)
+        public async Task<IActionResult> Get()
         {
-            var user = _userService.GetUser(id);
+            var users = await _userService.Get();
+
+            return Ok(users);
+        }
+
+        [HttpGet("{userId:length(24)}")]
+        public async Task<IActionResult> Get(string userId)
+        {
+            var user = await _userService.Get(userId);
 
             if (user == null)
             {
@@ -39,31 +44,31 @@ namespace keepnotes_api.Controllers
             return Ok(user);
         }
 
-        /*[HttpPut("{id:length(24)}")]
-        public ActionResult<UserDto> UpdateUser(string id, User updatedUser)
+        [HttpPut("{userId:length(24)}")]
+        public async Task<IActionResult> Update(string userId, User update)
         {
-            var user = _userService.GetUser(id);
+            var user = await _userService.Get(userId);
 
             if (user == null)
             {
                 return NotFound();
             }
             
-            _userService.UpdateUser(id, updatedUser);
+            await _userService.Update(userId, update);
 
             return NoContent();
-        }*/
+        }
 
-        [HttpDelete("{id:length(24)}")]
-        public ActionResult<User> DeleteUser(string id)
+        [HttpDelete("{userId:length(24)}")]
+        public async Task<IActionResult> Delete(string userId)
         {
-            var user = _userService.GetUser(id);
+            var user = await _userService.Get(userId);
             if (user == null)
             {
                 return NotFound();
             }
             
-            _userService.DeleteUser(id);
+            await _userService.Delete(userId);
 
             return NoContent();
         }

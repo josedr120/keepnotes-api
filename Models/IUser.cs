@@ -1,12 +1,13 @@
-namespace keepnotes_api.Interfaces
+namespace keepnotes_api.Models
 {
     public interface IUser
     {
+        string Id { get; set; }
 
         string Username { get; set; }
 
         string Email { get; set; }
-        
-        string ProfileUrl { get; set; }
+
+        string ProfileImageUrl { get; set; }
     }
 }
