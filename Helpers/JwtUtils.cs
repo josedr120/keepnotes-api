@@ -49,7 +49,7 @@ namespace keepnotes_api.Helpers
                 {
                     new("Id", user.Id)
                 }),
-                Expires = UtcNow.AddMinutes(1),
+                Expires = UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(tokenKey),
                     SecurityAlgorithms.HmacSha256Signature
