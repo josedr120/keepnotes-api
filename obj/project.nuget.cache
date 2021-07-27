@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "g88H4HAuNCio1sTXfJs1ZxoWMrz92klwQTZfoiDF5PtYJUGeGHUsWmE98FyJAphPwJrg/K9WgOWB8rDHHVt7gg==",
+  "dgSpecHash": "H0FCtaXjy09E6ZT+mDMPAc1EJoHFDS9xRJB+CsMPgJl+3O08qJ+oZGVq+KL5L2WPILhFSwhmsEpC51r3X+P4YA==",
   "success": true,
   "projectFilePath": "/run/media/josedr/DATA-X/Programming Projects/Web Develoment Projects/keep-notes/keepnotes-api/keepnotes-api.csproj",
   "expectedPackageFiles": [
+    "/home/josedr/.nuget/packages/awssdk.core/3.7.0.36/awssdk.core.3.7.0.36.nupkg.sha512",
     "/home/josedr/.nuget/packages/bcrypt.net-next/4.0.2/bcrypt.net-next.4.0.2.nupkg.sha512",
     "/home/josedr/.nuget/packages/dnsclient/1.4.0/dnsclient.1.4.0.nupkg.sha512",
     "/home/josedr/.nuget/packages/microsoft.aspnetcore.authentication/2.2.0/microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",

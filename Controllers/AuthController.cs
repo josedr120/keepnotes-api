@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using keepnotes_api.Helpers;
 using keepnotes_api.Models;
 using keepnotes_api.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -14,10 +15,12 @@ namespace keepnotes_api.Controllers
     {
         
         private readonly AuthService _authService;
+        private readonly JwtUtils _jwt;
 
-        public AuthController(AuthService authService)
+        public AuthController(AuthService authService, JwtUtils jwtUtils)
         {
             _authService = authService;
+            _jwt = jwtUtils;
         }
         
         [AllowAnonymous]
@@ -43,6 +46,30 @@ namespace keepnotes_api.Controllers
             }
 
             return Ok(response);
+        }
+
+        [AllowAnonymous]
+        [HttpPost("refresh-token")]
+        public IActionResult RefreshToken()
+        {
+            var refreshToken = Request.Headers["Authorization"].ToString().Split(" ")[1];
+            var response = _jwt.GenerateRefreshToken(refreshToken);
+
+            return Ok(response);
+        }
+        
+        
+        private string ipAddress()
+        {
+            // get source ip address for the current request
+            if (Request.Headers.ContainsKey("X-Forwarded-For"))
+            {
+                return Request.Headers["X-Forwarded-For"];
+            } 
+            else
+            {
+                return HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using keepnotes_api.DTOs;
 using keepnotes_api.Models;
 using MongoDB.Driver;
 
@@ -7,9 +8,9 @@ namespace keepnotes_api.Services
 {
     public interface IUserService
     {
-        Task<User> Get(string userId);
+        Task<UserDto> Get(string userId);
 
-        Task<IEnumerable<User>> Get();
+        Task<IEnumerable<UserDto>> Get();
 
         Task<bool> Update(string userId, User user);
 

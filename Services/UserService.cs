@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using keepnotes_api.DTOs;
 using keepnotes_api.Helpers;
 using keepnotes_api.Interfaces;
 using keepnotes_api.Models;
+using Microsoft.AspNetCore.Http.Headers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -30,11 +32,37 @@ namespace keepnotes_api.Services
         }
 
         // Get All Users
-        public async Task<IEnumerable<User>> Get() => await _user.Find(users => true).ToListAsync();
+        public async Task<IEnumerable<UserDto>> Get()
+        {
+            var users = new UserDto();
+            var e = await _user.Find(x => true).ToListAsync();
+            
+            e.ForEach(x =>
+            {
+                users.Id = x.Id;
+                users.Username = x.Username;
+                users.Email = x.Email;
+                users.ProfileUrl = x.ProfileImageUrl;
+            });
+
+            return new[] {users};
+        }
 
         // Get User by Id
-        public async Task<User> Get(string userId) => await _user.Find(user => user.Id == userId).FirstOrDefaultAsync();
-        
+        public async Task<UserDto> Get(string userId)
+        {
+            var e = await _user.Find(user => user.Id == userId).FirstOrDefaultAsync();
+
+            var testUser = new UserDto()
+            {
+                Id = e.Id,
+                Username = e.Username,
+                ProfileUrl = e.ProfileImageUrl
+            };
+            
+            return testUser;
+        }
+
         // Update User
         public async Task<bool> Update(string userId, User user)
         {

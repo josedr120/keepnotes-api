@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using keepnotes_api.DTOs;
 using keepnotes_api.Models;
 
 namespace keepnotes_api.Services
@@ -7,9 +8,9 @@ namespace keepnotes_api.Services
     public interface INoteService
     {
         
-        Task<Note> GetById(string noteId, string userId = "");
+        Task<NoteDto> GetById(string noteId, string userId = "");
         
-        Task<IEnumerable<Note>> Get(string userId);
+        Task<List<Note>> Get(string userId);
 
         Task<Note> Create(Note note, string userId);
 

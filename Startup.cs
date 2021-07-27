@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using keepnotes_api.Helpers;
@@ -53,14 +54,18 @@ namespace keepnotes_api
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("JwtSecretKey").ToString())),
+                    IssuerSigningKey =
+                        new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("JwtSecretKey").ToString())),
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
             });
-
+            
             services.AddSingleton<IKeepNotesDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<KeepNotesDatabaseSettings>>().Value);
+            
+            // Utils Service's
+            services.AddSingleton<JwtUtils>();
 
             services.AddSingleton<UserService>();
             services.AddSingleton<NoteService>();
@@ -72,6 +77,29 @@ namespace keepnotes_api
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "keepnotes_api", Version = "v1" });
+                /*c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "Enter ‘Bearer’ [space] and then your valid token in text"
+                });*/
+                /*c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme()
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<String>()
+                    }
+                });*/
             });
         }
 
@@ -92,8 +120,7 @@ namespace keepnotes_api
             app.UseCors(x => x
                 .AllowAnyMethod()
                 .AllowAnyHeader()
-                .AllowAnyOrigin()
-                .SetIsOriginAllowed(origin => true));
+                .AllowAnyOrigin());
 
             app.UseAuthentication();
 

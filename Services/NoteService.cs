@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using keepnotes_api.DTOs;
@@ -22,32 +23,49 @@ namespace keepnotes_api.Services
             _note = database.GetCollection<Note>(settings.NotesCollectionName);
         }
 
-        public async Task<IEnumerable<Note>> Get(string userId)
+        public async Task<List<Note>> Get(string userId)
         {
-            var userNotes = await _note.Find(notes => notes.UserId == userId).ToListAsync();
+            
+            var e = await _note.Find(notes => notes.UserId == userId).ToListAsync();
             
             // loops through all note objects and decrypts {title} and {content}
-            userNotes.ForEach(x =>
+            e.ForEach(x =>
             {
                 var decryptTitle = new Crypto().Decrypt(x.Title);
                 var decryptContent = new Crypto().Decrypt(x.Content);
                 
                 x.Title = decryptTitle;
                 x.Content = decryptContent;
+
+                /*userNotes.Id = x.Id;
+                userNotes.UserId = x.UserId;
+                userNotes.Title = x.Title;
+                userNotes.Content = x.Content;*/
+                
+                
             });
 
 
-            return userNotes;
+            return e;
         }
 
-        public async Task<Note> GetById(string noteId, string userId = "")
+        public async Task<NoteDto> GetById(string noteId, string userId = "")
         {
-            var userNote = await _note.Find(note => note.UserId == userId && note.Id == noteId).FirstOrDefaultAsync();
-            var decryptTitle = new Crypto().Decrypt(userNote.Title);
-            var decryptContent = new Crypto().Decrypt(userNote.Content);
+            var e = await _note.Find(note => note.UserId == userId && note.Id == noteId).FirstOrDefaultAsync();
+            var decryptTitle = new Crypto().Decrypt(e.Title);
+            var decryptContent = new Crypto().Decrypt(e.Content);
             
-            userNote.Title = decryptTitle;
-            userNote.Content = decryptContent;
+            e.Title = decryptTitle;
+            e.Content = decryptContent;
+
+            var userNote = new NoteDto()
+            {
+                Id = e.Id,
+                UserId = e.UserId,
+                Title = e.Title,
+                Content = e.Content
+            };
+
 
             return userNote;
         }

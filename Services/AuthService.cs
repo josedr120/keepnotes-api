@@ -18,17 +18,16 @@ namespace keepnotes_api.Services
     {
         private readonly IMongoCollection<User> _user;
 
-        private readonly string _jwtSecretKey;
+        private readonly JwtUtils _jwt;
 
-
-        public AuthService(IKeepNotesDatabaseSettings settings, IConfiguration configuration)
+        public AuthService(IKeepNotesDatabaseSettings settings, JwtUtils jwtUtils)
         {
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
             _user = database.GetCollection<User>(settings.UsersCollectionName);
 
-            _jwtSecretKey = configuration.GetSection("JwtSecretKey").ToString();
+            _jwt = jwtUtils;
         }
 
         public async Task<AuthenticatedResponse> Register(User user)
@@ -42,7 +41,7 @@ namespace keepnotes_api.Services
             user.Password = hashPassword;
             await _user.InsertOneAsync(user);
 
-            var token = GenerateJwtToken(user);
+            var token = _jwt.GenerateJwtToken(user);
 
             return new AuthenticatedResponse(user, token);
         }
@@ -66,48 +65,10 @@ namespace keepnotes_api.Services
             }
             
 
-            var token = GenerateJwtToken(user);
+            var token = _jwt.GenerateJwtToken(user);
 
             return new AuthenticatedResponse(user, token);
         }
-
-
-        private string GenerateJwtToken(User user)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-
-            var tokenKey = Encoding.ASCII.GetBytes(_jwtSecretKey);
-
-            var tokenDescriptor = new SecurityTokenDescriptor()
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim("Id", user.Id.ToString())
-                }),
-
-                Expires = UtcNow.AddHours(1),
-
-                SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(tokenKey),
-                    SecurityAlgorithms.HmacSha256Signature
-                )
-            };
-
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-
-            return tokenHandler.WriteToken(token);
-        }
-        
-        /*const randomColor = (): string => {
-            let randomColor = '';
-            let char = '0123456789abcdefghijklmnopqrstuvwxyz';
-
-            for (let i = 0; i < 6; i++) {
-                randomColor = randomColor + char[Math.floor(Math.random() * 16)];
-            }
-
-            return randomColor;
-        };*/
 
         private string RandomColor()
         {

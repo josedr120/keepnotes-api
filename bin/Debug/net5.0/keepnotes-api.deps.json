@@ -33,6 +33,7 @@
     ".NETCoreApp,Version=v5.0": {
       "keepnotes-api/1.0.0": {
         "dependencies": {
+          "AWSSDK.Core": "3.7.0.36",
           "BCrypt.Net-Next": "4.0.2",
           "Microsoft.AspNetCore.Authentication": "2.2.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "5.0.7",
@@ -331,6 +332,17 @@
         },
         "compile": {
           "keepnotes-api.dll": {}
+        }
+      },
+      "AWSSDK.Core/3.7.0.36": {
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.Core.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.7.0.36"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.1/AWSSDK.Core.dll": {}
         }
       },
       "BCrypt.Net-Next/4.0.2": {
@@ -2511,6 +2523,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AWSSDK.Core/3.7.0.36": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Av9aSxxA2l/1iIXjyF5Wj0s8rhTxbsdmiM85hh+J9yJC5377kzIIfmgsAWefrJGfZilBB2k2HtgFJKA0ZzpJUA==",
+      "path": "awssdk.core/3.7.0.36",
+      "hashPath": "awssdk.core.3.7.0.36.nupkg.sha512"
     },
     "BCrypt.Net-Next/4.0.2": {
       "type": "package",

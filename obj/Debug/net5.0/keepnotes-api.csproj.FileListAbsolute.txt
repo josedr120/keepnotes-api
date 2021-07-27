@@ -147,3 +147,4 @@
 /run/media/josedr/DATA-X/Programming Projects/Web Develoment Projects/keep-notes/keepnotes-api/bin/Debug/net5.0/runtimes/win/native/mongocrypt.dll
 /run/media/josedr/DATA-X/Programming Projects/Web Develoment Projects/keep-notes/keepnotes-api/obj/Debug/net5.0/keepnotes-api.csproj.CopyComplete
 /run/media/josedr/DATA-X/Programming Projects/Web Develoment Projects/keep-notes/keepnotes-api/obj/Debug/net5.0/keepnotes-api.genruntimeconfig.cache
+/run/media/josedr/DATA-X/Programming Projects/Web Develoment Projects/keep-notes/keepnotes-api/bin/Debug/net5.0/AWSSDK.Core.dll
