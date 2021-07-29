@@ -42,6 +42,9 @@ namespace keepnotes_api
             services.Configure<KeepNotesDatabaseSettings>(
                 Configuration.GetSection(nameof(KeepNotesDatabaseSettings)));
             
+            services.AddSingleton<IKeepNotesDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<KeepNotesDatabaseSettings>>().Value);
+            
 
             services.AddAuthentication(x =>
             {
@@ -61,8 +64,7 @@ namespace keepnotes_api
                 };
             });
             
-            services.AddSingleton<IKeepNotesDatabaseSettings>(sp =>
-                sp.GetRequiredService<IOptions<KeepNotesDatabaseSettings>>().Value);
+           
             
             // Utils Service's
             services.AddSingleton<JwtUtils>();

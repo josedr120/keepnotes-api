@@ -21,7 +21,7 @@ namespace keepnotes_api.Models
         [BsonElement("password")]
         public string Password { get; set; }
         
-        [BsonElement("profile_image_url")]
+        [BsonElement("profileImageUrl")]
         public string ProfileImageUrl { get; set; }
     }
 }

@@ -10,9 +10,11 @@ namespace keepnotes_api.Services
     {
         Task<UserDto> Get(string userId);
 
-        Task<IEnumerable<UserDto>> Get();
+        Task<List<UserDto>> Get();
 
         Task<bool> Update(string userId, User user);
+
+        Task<bool> ResetPassword(string userId, User user);
 
         Task<bool> Delete(string userId);
     }

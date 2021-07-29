@@ -37,7 +37,8 @@
           "BCrypt.Net-Next": "4.0.2",
           "Microsoft.AspNetCore.Authentication": "2.2.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "5.0.7",
-          "MongoDB.Bson": "2.12.4",
+          "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "5.0.8",
+          "MongoDB.Bson": "2.13.0",
           "MongoDB.Driver": "2.12.4",
           "MongoDB.Driver.Core": "2.12.4",
           "MongoDB.Libmongocrypt": "1.2.1",
@@ -462,13 +463,44 @@
           "Microsoft.Extensions.Primitives": "2.2.0"
         }
       },
+      "Microsoft.AspNetCore.JsonPatch/5.0.8": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "Newtonsoft.Json": "12.0.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.JsonPatch.dll": {
+            "assemblyVersion": "5.0.8.0",
+            "fileVersion": "5.0.821.31805"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.JsonPatch.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Mvc.NewtonsoftJson/5.0.8": {
+        "dependencies": {
+          "Microsoft.AspNetCore.JsonPatch": "5.0.8",
+          "Newtonsoft.Json": "12.0.2",
+          "Newtonsoft.Json.Bson": "1.0.2"
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll": {
+            "assemblyVersion": "5.0.8.0",
+            "fileVersion": "5.0.821.31805"
+          }
+        },
+        "compile": {
+          "lib/net5.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.WebUtilities/2.2.0": {
         "dependencies": {
           "Microsoft.Net.Http.Headers": "2.2.0",
           "System.Text.Encodings.Web": "4.5.0"
         }
       },
-      "Microsoft.CSharp/4.5.0": {},
+      "Microsoft.CSharp/4.7.0": {},
       "Microsoft.Extensions.ApiDescription.Server/3.0.0": {},
       "Microsoft.Extensions.Configuration.Abstractions/2.2.0": {
         "dependencies": {
@@ -568,7 +600,7 @@
       },
       "Microsoft.IdentityModel.Tokens/6.11.1": {
         "dependencies": {
-          "Microsoft.CSharp": "4.5.0",
+          "Microsoft.CSharp": "4.7.0",
           "Microsoft.IdentityModel.Logging": "6.11.1",
           "System.Security.Cryptography.Cng": "4.5.0"
         },
@@ -606,14 +638,14 @@
           "System.Security.Principal.Windows": "4.5.0"
         }
       },
-      "MongoDB.Bson/2.12.4": {
+      "MongoDB.Bson/2.13.0": {
         "dependencies": {
           "System.Runtime.CompilerServices.Unsafe": "5.0.0"
         },
         "runtime": {
           "lib/netstandard2.1/MongoDB.Bson.dll": {
-            "assemblyVersion": "2.12.4.0",
-            "fileVersion": "2.12.4.0"
+            "assemblyVersion": "2.13.0.0",
+            "fileVersion": "2.13.0.0"
           }
         },
         "compile": {
@@ -622,7 +654,7 @@
       },
       "MongoDB.Driver/2.12.4": {
         "dependencies": {
-          "MongoDB.Bson": "2.12.4",
+          "MongoDB.Bson": "2.13.0",
           "MongoDB.Driver.Core": "2.12.4",
           "MongoDB.Libmongocrypt": "1.2.1"
         },
@@ -639,7 +671,7 @@
       "MongoDB.Driver.Core/2.12.4": {
         "dependencies": {
           "DnsClient": "1.4.0",
-          "MongoDB.Bson": "2.12.4",
+          "MongoDB.Bson": "2.13.0",
           "MongoDB.Libmongocrypt": "1.2.1",
           "SharpCompress": "0.23.0",
           "System.Buffers": "4.5.1"
@@ -697,6 +729,31 @@
         },
         "compile": {
           "lib/netstandard2.1/MongoDB.Libmongocrypt.dll": {}
+        }
+      },
+      "Newtonsoft.Json/12.0.2": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "12.0.0.0",
+            "fileVersion": "12.0.2.23222"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Newtonsoft.Json.Bson/1.0.2": {
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.Bson.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.2.22727"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Newtonsoft.Json.Bson.dll": {}
         }
       },
       "SharpCompress/0.23.0": {
@@ -2636,6 +2693,20 @@
       "path": "microsoft.aspnetcore.http.features/2.2.0",
       "hashPath": "microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512"
     },
+    "Microsoft.AspNetCore.JsonPatch/5.0.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Crb4/sjNS/yc1ao/kHKIBnB8FWt0n88GmN7ubAwQiVUFYmFC3vOHgBX947gNHl2su0iCz3mDMFr3wMCiePEmMw==",
+      "path": "microsoft.aspnetcore.jsonpatch/5.0.8",
+      "hashPath": "microsoft.aspnetcore.jsonpatch.5.0.8.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Mvc.NewtonsoftJson/5.0.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-RI+0FCopaRzKzbtkUGdugzr64BHiHLkZviqB3WJl2l0aEqLwDYeluG7Q/dW/kgTwpy8y8XdFDWjC5A0iORBTqQ==",
+      "path": "microsoft.aspnetcore.mvc.newtonsoftjson/5.0.8",
+      "hashPath": "microsoft.aspnetcore.mvc.newtonsoftjson.5.0.8.nupkg.sha512"
+    },
     "Microsoft.AspNetCore.WebUtilities/2.2.0": {
       "type": "package",
       "serviceable": true,
@@ -2643,12 +2714,12 @@
       "path": "microsoft.aspnetcore.webutilities/2.2.0",
       "hashPath": "microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512"
     },
-    "Microsoft.CSharp/4.5.0": {
+    "Microsoft.CSharp/4.7.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-kaj6Wb4qoMuH3HySFJhxwQfe8R/sJsNJnANrvv8WdFPMoNbKY5htfNscv+LHCu5ipz+49m2e+WQXpLXr9XYemQ==",
-      "path": "microsoft.csharp/4.5.0",
-      "hashPath": "microsoft.csharp.4.5.0.nupkg.sha512"
+      "sha512": "sha512-pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
+      "path": "microsoft.csharp/4.7.0",
+      "hashPath": "microsoft.csharp.4.7.0.nupkg.sha512"
     },
     "Microsoft.Extensions.ApiDescription.Server/3.0.0": {
       "type": "package",
@@ -2783,12 +2854,12 @@
       "path": "microsoft.win32.registry/4.5.0",
       "hashPath": "microsoft.win32.registry.4.5.0.nupkg.sha512"
     },
-    "MongoDB.Bson/2.12.4": {
+    "MongoDB.Bson/2.13.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-cQ0DTdKIpPzqDWnu1lTbW7TU8zQkMZ6YkbICcA1x3zDQefPYi0T0WYA/t3VJbowiEH3IKNHsJ4DIFfCt9AOG7A==",
-      "path": "mongodb.bson/2.12.4",
-      "hashPath": "mongodb.bson.2.12.4.nupkg.sha512"
+      "sha512": "sha512-voNakTxq2NV3n5lM+HpJXcd4UgLk7dtkzaPyqHMDtiBqKJauqFJ0XQIM6l9v2LTqP/GPiDCxf3XCTJHphxamZA==",
+      "path": "mongodb.bson/2.13.0",
+      "hashPath": "mongodb.bson.2.13.0.nupkg.sha512"
     },
     "MongoDB.Driver/2.12.4": {
       "type": "package",
@@ -2810,6 +2881,20 @@
       "sha512": "sha512-VUtUAO2W6+DOjBtLHuD9WlTTcxYLXCNfp9YeKcws5LNAl0xej2KX1I37VsTAKnmnMjAF2Vwy1FXLCpK84FglMA==",
       "path": "mongodb.libmongocrypt/1.2.1",
       "hashPath": "mongodb.libmongocrypt.1.2.1.nupkg.sha512"
+    },
+    "Newtonsoft.Json/12.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rTK0s2EKlfHsQsH6Yx2smvcTCeyoDNgCW7FEYyV01drPlh2T243PR2DiDXqtC5N4GDm4Ma/lkxfW5a/4793vbA==",
+      "path": "newtonsoft.json/12.0.2",
+      "hashPath": "newtonsoft.json.12.0.2.nupkg.sha512"
+    },
+    "Newtonsoft.Json.Bson/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-QYFyxhaABwmq3p/21VrZNYvCg3DaEoN/wUuw5nmfAf0X3HLjgupwhkEWdgfb9nvGAUIv3osmZoD3kKl4jxEmYQ==",
+      "path": "newtonsoft.json.bson/1.0.2",
+      "hashPath": "newtonsoft.json.bson.1.0.2.nupkg.sha512"
     },
     "SharpCompress/0.23.0": {
       "type": "package",

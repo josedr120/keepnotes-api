@@ -75,13 +75,26 @@ namespace keepnotes_api.Controllers
         public async Task<IActionResult> Update(string userId, User update)
         {
             var user = await _userService.Get(userId);
-
             if (user == null)
             {
                 return NotFound();
             }
             
             await _userService.Update(userId, update);
+
+            return NoContent();
+        }
+
+        [HttpPut("{userId:length(24)}/reset-password")]
+        public async Task<IActionResult> ResetPassword([FromRoute] string userId, User user)
+        {
+            var getUser = await _userService.Get(userId);
+            if (getUser == null)
+            {
+                return NotFound();
+            }
+
+            await _userService.ResetPassword(userId, user);
 
             return NoContent();
         }

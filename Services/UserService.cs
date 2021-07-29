@@ -32,10 +32,10 @@ namespace keepnotes_api.Services
         }
 
         // Get All Users
-        public async Task<IEnumerable<UserDto>> Get()
+        public async Task<List<UserDto>> Get()
         {
-            var users = new UserDto();
             var e = await _user.Find(x => true).ToListAsync();
+            var users = new UserDto();
             
             e.ForEach(x =>
             {
@@ -45,7 +45,7 @@ namespace keepnotes_api.Services
                 users.ProfileUrl = x.ProfileImageUrl;
             });
 
-            return new[] {users};
+            return new List<UserDto>() {users};
         }
 
         // Get User by Id
@@ -53,14 +53,15 @@ namespace keepnotes_api.Services
         {
             var e = await _user.Find(user => user.Id == userId).FirstOrDefaultAsync();
 
-            var testUser = new UserDto()
+            var userDto = new UserDto()
             {
                 Id = e.Id,
                 Username = e.Username,
+                Email = e.Email,
                 ProfileUrl = e.ProfileImageUrl
             };
             
-            return testUser;
+            return userDto;
         }
 
         // Update User
@@ -72,7 +73,6 @@ namespace keepnotes_api.Services
             var update = Builders<User>.Update
                 .Set(x => x.Username, user.Username)
                 .Set(x => x.Email, user.Email)
-                .Set(x => x.Password, hashPassword)
                 .Set(x => x.ProfileImageUrl, user.ProfileImageUrl);
 
             var result = await _user.UpdateOneAsync(filter, update);
@@ -80,6 +80,25 @@ namespace keepnotes_api.Services
             return result.ModifiedCount == 1;
         }
         
+        // Reset Password or Change Password
+        public async Task<bool> ResetPassword(string userId, User user)
+        {
+            var hashPassword = BCryptNet.HashPassword(user.Password);
+    
+            var filter = Builders<User>.Filter.Eq(x => x.Id, userId);
+            var update = Builders<User>.Update
+                .Set(x => x.Password, hashPassword);
+
+            if (user.Password.Equals(hashPassword))
+            {
+                return false;
+            }
+
+            var result = await _user.UpdateOneAsync(filter, update);
+            
+            return result.ModifiedCount == 1;
+        }
+
         // Delete User
         public async Task<bool> Delete(string userId)
         {
