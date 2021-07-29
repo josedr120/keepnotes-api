@@ -16,7 +16,7 @@ using MongoDB.Bson;
 namespace keepnotes_api.Controllers
 {
     [Authorize]
-    [Route("api/user")]
+    [Route("api/user/{userId:length(24)}")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -58,7 +58,7 @@ namespace keepnotes_api.Controllers
 
         }
 
-        [HttpGet("{userId:length(24)}")]
+        [HttpGet]
         public async Task<ActionResult<UserDto>> Get(string userId)
         {
             var user = await _userService.Get(userId);
@@ -71,7 +71,7 @@ namespace keepnotes_api.Controllers
             return Ok(user);
         }
 
-        [HttpPut("{userId:length(24)}")]
+        [HttpPut]
         public async Task<IActionResult> Update(string userId, User update)
         {
             var user = await _userService.Get(userId);
@@ -85,8 +85,8 @@ namespace keepnotes_api.Controllers
             return NoContent();
         }
 
-        [HttpPut("{userId:length(24)}/reset-password")]
-        public async Task<IActionResult> ResetPassword([FromRoute] string userId, User user)
+        [HttpPut("reset-password")]
+        public async Task<IActionResult> ResetPassword(string userId, User user)
         {
             var getUser = await _userService.Get(userId);
             if (getUser == null)
@@ -99,7 +99,7 @@ namespace keepnotes_api.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{userId:length(24)}")]
+        [HttpDelete]
         public async Task<IActionResult> Delete(string userId)
         {
             var user = await _userService.Get(userId);
