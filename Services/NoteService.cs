@@ -26,10 +26,10 @@ namespace keepnotes_api.Services
         public async Task<List<Note>> Get(string userId)
         {
             
-            var e = await _note.Find(notes => notes.UserId == userId).ToListAsync();
+            var notes = await _note.Find(x => x.UserId == userId).ToListAsync();
             
             // loops through all note objects and decrypts {title} and {content}
-            e.ForEach(x =>
+            notes.ForEach(x =>
             {
                 var decryptTitle = new Crypto().Decrypt(x.Title);
                 var decryptContent = new Crypto().Decrypt(x.Content);
@@ -37,16 +37,10 @@ namespace keepnotes_api.Services
                 x.Title = decryptTitle;
                 x.Content = decryptContent;
 
-                /*userNotes.Id = x.Id;
-                userNotes.UserId = x.UserId;
-                userNotes.Title = x.Title;
-                userNotes.Content = x.Content;*/
-                
-                
             });
 
 
-            return e;
+            return notes;
         }
 
         public async Task<NoteDto> GetById(string noteId, string userId = "")

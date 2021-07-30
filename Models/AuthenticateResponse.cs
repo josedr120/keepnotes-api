@@ -11,7 +11,7 @@ namespace keepnotes_api.Models
         // ReSharper disable once MemberCanBePrivate.Global
         public string Token { get; set; }
 
-        public AuthenticatedResponse(User user, string token)
+        public AuthenticatedResponse(IUser user, string token)
         {
             Id = user.Id;
             Username = user.Username;

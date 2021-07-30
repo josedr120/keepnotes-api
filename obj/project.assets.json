@@ -2311,11 +2311,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/run/media/josedr/DATA-X/Programming Proyects/Web Develoment Proyects/keep-notes/keepnotes-api/keepnotes-api.csproj",
+      "projectUniqueName": "/run/media/josedr/DATA-X/Programming Projects/Web Develoment Projects/keep-notes/keepnotes-api/keepnotes-api.csproj",
       "projectName": "keepnotes-api",
-      "projectPath": "/run/media/josedr/DATA-X/Programming Proyects/Web Develoment Proyects/keep-notes/keepnotes-api/keepnotes-api.csproj",
+      "projectPath": "/run/media/josedr/DATA-X/Programming Projects/Web Develoment Projects/keep-notes/keepnotes-api/keepnotes-api.csproj",
       "packagesPath": "/home/josedr/.nuget/packages/",
-      "outputPath": "/run/media/josedr/DATA-X/Programming Proyects/Web Develoment Proyects/keep-notes/keepnotes-api/obj/",
+      "outputPath": "/run/media/josedr/DATA-X/Programming Projects/Web Develoment Projects/keep-notes/keepnotes-api/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/josedr/.nuget/NuGet/NuGet.Config"
@@ -2405,7 +2405,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.204/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.205/RuntimeIdentifierGraph.json"
       }
     }
   }

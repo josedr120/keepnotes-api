@@ -88,11 +88,7 @@ namespace keepnotes_api.Services
             var filter = Builders<User>.Filter.Eq(x => x.Id, userId);
             var update = Builders<User>.Update
                 .Set(x => x.Password, hashPassword);
-
-            if (user.Password.Equals(hashPassword))
-            {
-                return false;
-            }
+            
 
             var result = await _user.UpdateOneAsync(filter, update);
             
