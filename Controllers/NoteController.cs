@@ -52,9 +52,8 @@ namespace keepnotes_api.Controllers
         }
 
         [HttpPut("{noteId:length(24)}")]
-        public async Task<IActionResult> Update([FromRoute] string userId, string noteId, Note updatedNote)
+        public async Task<IActionResult> Update(string userId, string noteId, Note updatedNote)
         {
-            
             if (noteId == null)
             {
                 return NotFound();
@@ -64,9 +63,9 @@ namespace keepnotes_api.Controllers
         }
 
         [HttpDelete("{noteId:length(24)}")]
-        public async Task<IActionResult> Delete(string noteId)
+        public async Task<IActionResult> Delete(string noteId, string userId)
         {
-            var note = await _noteService.GetById(noteId);
+            var note = await _noteService.GetById(noteId, userId);
 
             if (note == null)
             {
