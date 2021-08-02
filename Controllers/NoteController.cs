@@ -46,9 +46,14 @@ namespace keepnotes_api.Controllers
         [HttpPost("create")]
         public async Task<IActionResult> Create(Note note, [FromRoute] string userId)
         {
+            if (string.IsNullOrEmpty(note.Title) || string.IsNullOrEmpty(note.Content))
+            {
+                return NoContent();
+            }
+            
             await _noteService.Create(note, userId);
 
-            return Ok(note);
+            return Ok();
         }
 
         [HttpPut("{noteId:length(24)}")]

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "himgF+e6JADaEcSDBngAKPsM13/IBili3cIUFU1yGxeKa5sobEZKkxa5hwf1Sc+i/pfka/p3qPMdw599JUkQyw==",
+  "dgSpecHash": "EHkpPGhje4KYF2t5bfC5GCkwkmKRh+ErSw0lMDnPgGd5dtTJqMyK1ealFrhdo2jivwGrIVa4TiffZAFuiezt9Q==",
   "success": true,
-  "projectFilePath": "/home/josedr/DATA-X/Programming Proyects/Web Develoment Proyects/keep-notes/keepnotes-api/keepnotes-api.csproj",
+  "projectFilePath": "/run/media/josedr/DATA-X/Programming Projects/Web Develoment Projects/keep-notes/keepnotes-api/keepnotes-api.csproj",
   "expectedPackageFiles": [
     "/home/josedr/.nuget/packages/awssdk.core/3.7.0.36/awssdk.core.3.7.0.36.nupkg.sha512",
     "/home/josedr/.nuget/packages/bcrypt.net-next/4.0.2/bcrypt.net-next.4.0.2.nupkg.sha512",

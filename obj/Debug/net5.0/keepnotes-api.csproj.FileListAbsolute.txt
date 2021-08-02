@@ -203,3 +203,7 @@
 /run/media/josedr/DATA-X/Programming Proyects/Web Develoment Proyects/keep-notes/keepnotes-api/bin/Debug/net5.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 /run/media/josedr/DATA-X/Programming Proyects/Web Develoment Proyects/keep-notes/keepnotes-api/bin/Debug/net5.0/Newtonsoft.Json.dll
 /run/media/josedr/DATA-X/Programming Proyects/Web Develoment Proyects/keep-notes/keepnotes-api/bin/Debug/net5.0/Newtonsoft.Json.Bson.dll
+/run/media/josedr/DATA-X/Programming Projects/Web Develoment Projects/keep-notes/keepnotes-api/bin/Debug/net5.0/Microsoft.AspNetCore.JsonPatch.dll
+/run/media/josedr/DATA-X/Programming Projects/Web Develoment Projects/keep-notes/keepnotes-api/bin/Debug/net5.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/run/media/josedr/DATA-X/Programming Projects/Web Develoment Projects/keep-notes/keepnotes-api/bin/Debug/net5.0/Newtonsoft.Json.dll
+/run/media/josedr/DATA-X/Programming Projects/Web Develoment Projects/keep-notes/keepnotes-api/bin/Debug/net5.0/Newtonsoft.Json.Bson.dll

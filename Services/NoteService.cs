@@ -72,7 +72,14 @@ namespace keepnotes_api.Services
             note.UserId = userId;
             note.Title = titleEncrypt;
             note.Content = contentEncrypt;
+
+            if (string.IsNullOrEmpty(note.Title) || string.IsNullOrEmpty(note.Content))
+            {
+                return null;
+            }
             await _note.InsertOneAsync(note);
+
+            
 
             return note;
         }
