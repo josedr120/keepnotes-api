@@ -1,4 +1,6 @@
-namespace keepnotes_api.Models
+using System.Collections.Generic;
+
+namespace keepnotes_api.Models.User
 {
     public interface IUser
     {
@@ -9,5 +11,7 @@ namespace keepnotes_api.Models
         string Email { get; set; }
 
         string ProfileImageUrl { get; set; }
+        
+        List<UserSettings> Settings { get; set; }
     }
 }

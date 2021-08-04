@@ -1,6 +1,7 @@
 using System.Data.Common;
+using keepnotes_api.Models.User;
 
-namespace keepnotes_api.Models
+namespace keepnotes_api.Models.Auth
 {
     public class AuthenticatedResponse
     {

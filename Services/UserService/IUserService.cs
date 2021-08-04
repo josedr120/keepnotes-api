@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using keepnotes_api.DTOs;
-using keepnotes_api.Models;
-using MongoDB.Driver;
+using keepnotes_api.Models.User;
 
-namespace keepnotes_api.Services
+namespace keepnotes_api.Services.UserService
 {
     public interface IUserService
     {

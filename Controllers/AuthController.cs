@@ -1,11 +1,10 @@
 using System.Threading.Tasks;
 using keepnotes_api.Helpers;
-using keepnotes_api.Models;
-using keepnotes_api.Services;
+using keepnotes_api.Models.Auth;
+using keepnotes_api.Models.User;
+using keepnotes_api.Services.AuthService;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.OpenApi.Any;
 
 namespace keepnotes_api.Controllers
 {

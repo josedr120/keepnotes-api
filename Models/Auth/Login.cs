@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using keepnotes_api.Interfaces;
 
-namespace keepnotes_api.Models
+namespace keepnotes_api.Models.Auth
 {
     public class Login : ILogin
     {

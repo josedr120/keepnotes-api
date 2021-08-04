@@ -1,9 +1,10 @@
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using keepnotes_api.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace keepnotes_api.Models
+namespace keepnotes_api.Models.User
 {
     public class User: IUser
     {
@@ -23,5 +24,8 @@ namespace keepnotes_api.Models
         
         [BsonElement("profileImageUrl")]
         public string ProfileImageUrl { get; set; }
+
+        [BsonElement("settings")]
+        public List<UserSettings> Settings { get; set; }
     }
 }

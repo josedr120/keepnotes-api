@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using keepnotes_api.Models;
+using keepnotes_api.Models.User;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using MongoDB.Bson;
@@ -106,8 +107,8 @@ namespace keepnotes_api.Helpers
             var refreshToken = new RefreshToken()
             {
                 Token = Convert.ToBase64String(randomBytes),
-                Expires = DateTime.UtcNow.AddDays(7),
-                Created = DateTime.Now,
+                Expires = UtcNow.AddDays(7),
+                Created = Now,
                 CreatedByIp = ipAddress
             };
             

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -6,13 +7,16 @@ using System.Threading.Tasks;
 using keepnotes_api.Helpers;
 using keepnotes_api.Interfaces;
 using keepnotes_api.Models;
+using keepnotes_api.Models.Auth;
+using keepnotes_api.Models.Db;
+using keepnotes_api.Models.User;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
 using static System.DateTime;
 using BCryptNet = BCrypt.Net.BCrypt;
 
-namespace keepnotes_api.Services
+namespace keepnotes_api.Services.AuthService
 {
     public class AuthService : IAuthService
     {
@@ -35,7 +39,7 @@ namespace keepnotes_api.Services
 
             var salt = BCryptNet.GenerateSalt(10);
             var hashPassword = BCryptNet.HashPassword(user.Password, salt);
-
+            
             user.ProfileImageUrl =
                 $"https://ui-avatars.com/api/?name={user.Username}&background={RandomColor()}&color=fff";
             user.Password = hashPassword;

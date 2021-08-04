@@ -6,10 +6,12 @@ using keepnotes_api.DTOs;
 using keepnotes_api.Helpers;
 using keepnotes_api.Interfaces;
 using keepnotes_api.Models;
+using keepnotes_api.Models.Db;
+using keepnotes_api.Models.Note;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Driver;
 
-namespace keepnotes_api.Services
+namespace keepnotes_api.Services.NoteService
 {
     public class NoteService : INoteService
     {

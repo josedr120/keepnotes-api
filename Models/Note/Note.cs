@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace keepnotes_api.Models
+namespace keepnotes_api.Models.Note
 {
     public class Note
     {

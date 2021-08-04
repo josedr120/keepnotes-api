@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using keepnotes_api.Interfaces;
+using keepnotes_api.Models.User;
 
 namespace keepnotes_api.DTOs
 {
@@ -11,5 +13,7 @@ namespace keepnotes_api.DTOs
         public string Email { get; set; }
         
         public string ProfileUrl { get; set; }
+        
+        public List<UserSettings> Settings { get; set; }
     }
 }

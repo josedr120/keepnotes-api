@@ -1,4 +1,4 @@
-namespace keepnotes_api.Interfaces
+namespace keepnotes_api.Models.Auth
 {
     public interface ILogin
     {

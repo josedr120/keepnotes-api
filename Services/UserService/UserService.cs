@@ -1,21 +1,13 @@
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 using keepnotes_api.DTOs;
-using keepnotes_api.Helpers;
-using keepnotes_api.Interfaces;
-using keepnotes_api.Models;
-using Microsoft.AspNetCore.Http.Headers;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
+using keepnotes_api.Models.Db;
+using keepnotes_api.Models.Note;
+using keepnotes_api.Models.User;
 using MongoDB.Driver;
 using BCryptNet = BCrypt.Net.BCrypt;
 
-namespace keepnotes_api.Services
+namespace keepnotes_api.Services.UserService
 {
     public class UserService : IUserService
     {
@@ -43,6 +35,7 @@ namespace keepnotes_api.Services
                 users.Username = x.Username;
                 users.Email = x.Email;
                 users.ProfileUrl = x.ProfileImageUrl;
+                users.Settings = x.Settings;
             });
 
             return new List<UserDto>() {users};
@@ -58,7 +51,8 @@ namespace keepnotes_api.Services
                 Id = e.Id,
                 Username = e.Username,
                 Email = e.Email,
-                ProfileUrl = e.ProfileImageUrl
+                ProfileUrl = e.ProfileImageUrl,
+                Settings = e.Settings
             };
             
             return userDto;
@@ -73,7 +67,8 @@ namespace keepnotes_api.Services
             var update = Builders<User>.Update
                 .Set(x => x.Username, user.Username)
                 .Set(x => x.Email, user.Email)
-                .Set(x => x.ProfileImageUrl, user.ProfileImageUrl);
+                .Set(x => x.ProfileImageUrl, user.ProfileImageUrl)
+                .Set(x => x.Settings, user.Settings);
 
             var result = await _user.UpdateOneAsync(filter, update);
             

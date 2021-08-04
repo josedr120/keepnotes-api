@@ -1,6 +1,6 @@
 using keepnotes_api.Interfaces;
 
-namespace keepnotes_api.Models
+namespace keepnotes_api.Models.Db
 {
     public class KeepNotesDatabaseSettings: IKeepNotesDatabaseSettings
     {

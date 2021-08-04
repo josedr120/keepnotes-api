@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Security;
 using System.Threading.Tasks;
 using keepnotes_api.DTOs;
 using keepnotes_api.Helpers;
-using keepnotes_api.Models;
-using keepnotes_api.Services;
+using keepnotes_api.Models.User;
+using keepnotes_api.Services.UserService;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
