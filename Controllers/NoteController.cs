@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using keepnotes_api.DTOs;
@@ -27,6 +28,8 @@ namespace keepnotes_api.Controllers
         public async Task<ActionResult<Note>> Get([FromRoute] string userId)
         {
             var userNotes = await _noteService.Get(userId);
+
+            Console.WriteLine(userNotes.Count);
 
             return Ok(userNotes);
         }

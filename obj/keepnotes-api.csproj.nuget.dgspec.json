@@ -1,30 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "/run/media/josedr/DATA-X/Programming Projects/Web Develoment Projects/keep-notes/keepnotes-api/keepnotes-api.csproj": {}
+    "/run/media/josedr/DATA-X/Programming Projects/MyProjects/keep-notes/keepnotes-api/keepnotes-api.csproj": {}
   },
   "projects": {
-    "/run/media/josedr/DATA-X/Programming Projects/Web Develoment Projects/keep-notes/keepnotes-api/keepnotes-api.csproj": {
+    "/run/media/josedr/DATA-X/Programming Projects/MyProjects/keep-notes/keepnotes-api/keepnotes-api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/run/media/josedr/DATA-X/Programming Projects/Web Develoment Projects/keep-notes/keepnotes-api/keepnotes-api.csproj",
+        "projectUniqueName": "/run/media/josedr/DATA-X/Programming Projects/MyProjects/keep-notes/keepnotes-api/keepnotes-api.csproj",
         "projectName": "keepnotes-api",
-        "projectPath": "/run/media/josedr/DATA-X/Programming Projects/Web Develoment Projects/keep-notes/keepnotes-api/keepnotes-api.csproj",
+        "projectPath": "/run/media/josedr/DATA-X/Programming Projects/MyProjects/keep-notes/keepnotes-api/keepnotes-api.csproj",
         "packagesPath": "/home/josedr/.nuget/packages/",
-        "outputPath": "/run/media/josedr/DATA-X/Programming Projects/Web Develoment Projects/keep-notes/keepnotes-api/obj/",
+        "outputPath": "/run/media/josedr/DATA-X/Programming Projects/MyProjects/keep-notes/keepnotes-api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/josedr/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net5.0"
+          "net6.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {}
           }
         },
@@ -35,8 +35,8 @@
         }
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
             "AWSSDK.Core": {
               "target": "Package",
@@ -45,6 +45,10 @@
             "BCrypt.Net-Next": {
               "target": "Package",
               "version": "[4.0.2, )"
+            },
+            "HttpClientLogging": {
+              "target": "Package",
+              "version": "[1.0.0, )"
             },
             "Microsoft.AspNetCore.Authentication": {
               "target": "Package",
@@ -101,7 +105,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.205/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.100/RuntimeIdentifierGraph.json"
         }
       }
     }

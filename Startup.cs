@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Http.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -65,6 +66,8 @@ namespace keepnotes_api
             services.AddSingleton<UserService>();
             services.AddSingleton<NoteService>();
             services.AddSingleton<AuthService>();
+
+            services.AddMemoryCache();
 
 
             services.AddCors();

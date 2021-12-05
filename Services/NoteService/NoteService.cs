@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -77,11 +78,9 @@ namespace keepnotes_api.Services.NoteService
 
             if (string.IsNullOrEmpty(note.Title) || string.IsNullOrEmpty(note.Content))
             {
-                return null;
+                throw new Exception("Theres no Content!!");
             }
             await _note.InsertOneAsync(note);
-
-            
 
             return note;
         }
