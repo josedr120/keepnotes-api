@@ -10,21 +10,21 @@ namespace keepnotes_api.Helpers
     {
         public string Encrypt(string plainText)  
         {  
-            byte[] iv = new byte[16];  
-            byte[] array;  
+            var iv = new byte[16];
+            byte[] array; 
   
-            using (Aes aes = Aes.Create())  
+            using (var aes = Aes.Create())  
             {  
                 aes.Key = Encoding.UTF8.GetBytes("2D4A614E635266556A586E3272357538");  
                 aes.IV = iv;  
   
-                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);  
+                var encryptor = aes.CreateEncryptor(aes.Key, aes.IV);  
   
-                using (MemoryStream memoryStream = new MemoryStream())  
+                using (var memoryStream = new MemoryStream())  
                 {  
-                    using (CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, encryptor, CryptoStreamMode.Write))  
+                    using (var cryptoStream = new CryptoStream((Stream)memoryStream, encryptor, CryptoStreamMode.Write))  
                     {  
-                        using (StreamWriter streamWriter = new StreamWriter((Stream)cryptoStream))  
+                        using (var streamWriter = new StreamWriter((Stream)cryptoStream))  
                         {  
                             streamWriter.Write(plainText);  
                         }  

@@ -66,7 +66,7 @@ namespace keepnotes_api.Helpers
         {
             if (string.IsNullOrEmpty(token))
             {
-                return false;
+                throw new Exception("There no Token!!");
             }
 
             var tokenHandler = new JwtSecurityTokenHandler();
